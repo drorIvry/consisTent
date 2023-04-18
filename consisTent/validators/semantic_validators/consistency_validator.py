@@ -10,6 +10,7 @@ class ConsistencyValidator(Validator):
     def __init__(
         self,
         consistency_threshold: int = 1,
+        seed_size: int = 20,
         client=None,
         collection: Collection = None,
     ):
@@ -21,6 +22,7 @@ class ConsistencyValidator(Validator):
             )
         self._cache = ChromaCache(
             collection=collection,
+            size=seed_size,
         )
         self._consistency_threshold = consistency_threshold
 
