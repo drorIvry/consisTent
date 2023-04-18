@@ -13,14 +13,23 @@ class JsonValidator(Validator):
     @staticmethod
     def validate(
         model_output: str,
-        schema: BaseModel = None,
+        model: BaseModel = None,
     ):
         parsed_json = json.loads(model_output)
-        if schema:
+        if model:
             js_validate(
                 parsed_json,
-                schema.schema(),
+                model.schema(),
             )
+
+
+class PydanticValidator(Validator):
+    @staticmethod
+    def validate(
+        model_output: str,
+        model: BaseModel,
+    ):
+        model.parse_raw(model_output)
 
 
 class YamlValidator(Validator):
