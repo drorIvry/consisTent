@@ -1,6 +1,16 @@
 {
+    "editor.formatOnSave": true,
     "python.linting.banditEnabled": false,
-    "python.linting.flake8Enabled": true,
+    "python.formatting.provider": "black",
     "python.linting.enabled": true,
-    "python.formatting.provider": "black"
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": [
+        "--extend-ignore=E203",
+        "--extend-ignore=E501",
+        "--extend-ignore=E503",
+        "--max-line-length=88",
+    ],
+    "cSpell.words": [
+        "hnswlib"
+    ],
 }
