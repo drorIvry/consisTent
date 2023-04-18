@@ -1,11 +1,14 @@
-import uuid
 from chromadb.api.models.Collection import Collection
 
-# from .base_cache import BaseCache
+from .base_cache import BaseCache
 
 
-class ChromaCache:  # (BaseCache):
-    def __init__(self, collection: Collection, size: int = 20):
+class ChromaCache(BaseCache):
+    def __init__(
+        self,
+        collection: Collection,
+        size: int = 20,
+    ):
         self._collection = collection
         self._size = size
         self._cache_ids = list()
@@ -18,7 +21,7 @@ class ChromaCache:  # (BaseCache):
             id_to_remove = self._cache_ids.pop(0)
             self._collection.delete(ids=[id_to_remove])
 
-        new_id = str(uuid.uuid4())
+        new_id = str(hash(document))
         self._cache_ids.append(new_id)
 
         self._collection.add(
@@ -26,10 +29,14 @@ class ChromaCache:  # (BaseCache):
             documents=[document],
         )
 
-    def calculate_cache_distances(
+    def calculate_distance(
         self,
         query_text: str,
     ):
+        if len(self._cache_ids > self._size):
+            self.push_to_cache(query_text)
+            return 0
+
         result = self._collection.query(
             query_texts=[query_text],
             n_results=len(
@@ -37,4 +44,6 @@ class ChromaCache:  # (BaseCache):
             ),
         )
 
-        return result["distances"]
+        distances = result["distances"]
+
+        return sum(distances) / len(distances)
