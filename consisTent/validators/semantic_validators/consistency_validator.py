@@ -24,6 +24,7 @@ class ConsistencyValidator(Validator):
             collection=collection,
             size=seed_size,
         )
+
         self._consistency_threshold = consistency_threshold
 
     def validate(
@@ -35,8 +36,6 @@ class ConsistencyValidator(Validator):
             self._cache.push_to_cache(model_output)
             return
 
-        raise (
-            ValueError(
-                f"model output is past the consistency threshold: {self._consistency_threshold} < {distance}"  # noqa E501
-            )
+        raise ValueError(
+            f"model output is past the consistency threshold: {self._consistency_threshold} < {distance}"  # noqa E501
         )

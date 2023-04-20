@@ -1,2 +1,2 @@
 from . import consistency_validator
-from . import llm_validator
+from . import openai_validator
