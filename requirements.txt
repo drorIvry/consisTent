@@ -1,0 +1,4 @@
+pre-commit==3.2.2
+black==23.3.0
+flake8==6.0.0
+pyflakes==3.0.1
