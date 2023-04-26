@@ -1,0 +1,44 @@
+# pyproject.toml
+
+[build-system]
+requires      = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "consistent"
+version = "0.0.2"
+description = "Make sure AI model outputs are consistent"
+readme = "README.md"
+license = { file = "LICENSE" }
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+keywords = ["OpenAI", "LLM", "GPT", "Cohere"]
+dependencies = [
+    "chromadb",
+    "openai",
+    "langchain",
+    'tomli; python_version < "3.11"',
+]
+requires-python = ">=3.8"
+
+[project.optional-dependencies]
+dev = ["black", "bumpver", "isort", "pip-tools", "pytest", "pre-commit", "pyflakes"]
+
+[project.urls]
+Homepage = "https://github.com/drorivry/consistent"
+
+
+[tool.bumpver]
+current_version = "0.0.2"
+version_pattern = "MAJOR.MINOR.PATCH"
+commit_message  = "Bump version {old_version} -> {new_version}"
+commit          = true
+tag             = true
+push            = false
+
+[tool.bumpver.file_patterns]
+"pyproject.toml" = ['current_version = "{version}"', 'version = "{version}"']
+"consistent/__init__.py" = ["{version}"]
