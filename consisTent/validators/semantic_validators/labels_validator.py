@@ -4,7 +4,7 @@ from langchain.output_parsers import StructuredOutputParser, ResponseSchema
 from langchain.prompts import ChatPromptTemplate, HumanMessagePromptTemplate
 from langchain.chat_models import ChatOpenAI
 
-from ..base_validator import Validator
+from consisTent.validators.base_validator import Validator
 
 
 class LabelsValidator(Validator):
@@ -20,12 +20,12 @@ class LabelsValidator(Validator):
 
         response_schemas = [
             ResponseSchema(
-                name="criteria",
-                description="This is the input_criteria from the user",
+                name="label",
+                description="This is the input_label from the user",
             ),
             ResponseSchema(
                 name="passed",
-                description="This is the validation result of the input against this criteria",  # noqa E501
+                description="This is the validation boolean result of the input against this labels. values are true / false",  # noqa E501
             ),
             ResponseSchema(
                 name="match_score",
@@ -33,7 +33,7 @@ class LabelsValidator(Validator):
             ),
             ResponseSchema(
                 name="reason",
-                description="Why did the input failed / passed this criteria",
+                description="Why did the input failed / passed this labels",
             ),
         ]
 
@@ -42,15 +42,15 @@ class LabelsValidator(Validator):
 
         self._template = """
         you are an input validator.
-        given a set of criteria your goal is to decide
-        if the input matches the given criteria.
+        given a set of labels your goal is to decide
+        if the input matches the given labels.
 
         {format_instructions}
 
         Wrap your final output with closed and open brackets (a list of json objects)
 
-        CRITERIA:
-        {criteria}
+        labels:
+        {labels}
 
         INPUT:
         {user_input}
@@ -60,19 +60,19 @@ class LabelsValidator(Validator):
 
         self._prompt = ChatPromptTemplate(
             messages=[HumanMessagePromptTemplate.from_template(self._template)],
-            input_variables=["criteria", "user_input"],
+            input_variables=["labels", "user_input"],
             partial_variables={"format_instructions": format_instructions},
         )
 
     def validate(
         self,
-        criteria: List[str],
+        labels: List[str],
         model_output: str,
     ):
-        parsed_criteria = ", ".join(criteria)
+        parsed_labels = ", ".join(labels)
 
         _input = self._prompt.format_prompt(
-            criteria=parsed_criteria,
+            labels=parsed_labels,
             user_input=model_output,
         )
 
@@ -83,4 +83,4 @@ class LabelsValidator(Validator):
         for entry in structured_data:
             assert (
                 entry["passed"] is True
-            ), f"llm validation check validation failed on {entry['criteria']} for {entry['reason']}"  # noqa: E501
+            ), f"llm validation check validation failed on {entry['label']} for {entry['reason']}"  # noqa: E501

@@ -56,3 +56,18 @@ consisTent.ConsistencyValidator(
     model_output="the dog sat on the mat",
 )
 ```
+
+### Label Test
+
+```python
+OPENAI_KEY = "XXXXXXXXXXXXXXX"
+
+consisTent.LabelsValidator(openai_key=OPENAI_KEY).validate(
+    labels=[
+        "funny",
+        "short",
+        "about rabbits",
+    ],
+    model_output="What do you call a rabbit that tells jokes? A funny bunny!",
+)
+```
