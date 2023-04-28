@@ -1,5 +1,9 @@
 <img align="center" src="./logo.png">
 
+[![tests](https://github.com/drorIvry/consisTent/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/drorIvry/consisTent/actions/workflows/pre-commit.yml)
+
+[![release](https://github.com/drorIvry/consisTent/actions/workflows/python-publish.yml/badge.svg)](https://github.com/drorIvry/consisTent/actions/workflows/python-publish.yml)
+
 consisTent is a full blows testing framework for prompts. The goal of consisTent is to create reproducible tests for LLM based applications regardless of the FM used.
 
 
