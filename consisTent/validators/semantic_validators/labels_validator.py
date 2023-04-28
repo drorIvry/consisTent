@@ -7,7 +7,7 @@ from langchain.chat_models import ChatOpenAI
 from ..base_validator import Validator
 
 
-class OpenAIValidator(Validator):
+class LabelsValidator(Validator):
     def __init__(
         self,
         openai_key: str,

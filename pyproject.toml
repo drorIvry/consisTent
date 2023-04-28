@@ -19,6 +19,8 @@ keywords = ["OpenAI", "LLM", "GPT", "Cohere"]
 dependencies = [
     "chromadb",
     "openai",
+    "js2py",
+    "jsonschema",
     "langchain",
     'tomli; python_version < "3.11"',
 ]
