@@ -75,3 +75,14 @@ consisTent.LabelsValidator(openai_key=OPENAI_KEY).validate(
     model_output="What do you call a rabbit that tells jokes? A funny bunny!",
 )
 ```
+
+### facts validation
+
+```python
+OPENAI_KEY = "XXXXXXXXXXXXXXX"
+
+consisTent.FactsValidator(openai_key=OPENAI_KEY).validate(
+    facts=["this car weighs 1000KG"],
+    model_output="I can lift this car",
+)
+```
