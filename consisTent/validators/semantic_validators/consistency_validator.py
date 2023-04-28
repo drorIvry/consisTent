@@ -1,3 +1,4 @@
+from typing import List
 import chromadb
 from chromadb.api.models.Collection import Collection
 
@@ -30,7 +31,11 @@ class ConsistencyValidator(Validator):
     def validate(
         self,
         model_output: str,
+        seed: List[str],
     ):
+        for item in seed:
+            self._cache.push_to_cache(item)
+
         distance = self._cache.calculate_distance(model_output)
         if distance <= self._consistency_threshold:
             self._cache.push_to_cache(model_output)
