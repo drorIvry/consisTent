@@ -43,4 +43,4 @@ push            = false
 
 [tool.bumpver.file_patterns]
 "pyproject.toml" = ['current_version = "{version}"', 'version = "{version}"']
-"consistent/__init__.py" = ["{version}"]
+"consisTent/__init__.py" = ["{version}"]
