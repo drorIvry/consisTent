@@ -33,7 +33,7 @@ class ChromaCache(BaseCache):
         self,
         query_text: str,
     ):
-        if len(self._cache_ids > self._size):
+        if len(self._cache_ids) > self._size:
             self.push_to_cache(query_text)
             return 0
 
@@ -44,6 +44,6 @@ class ChromaCache(BaseCache):
             ),
         )
 
-        distances = result["distances"]
+        distances = result["distances"][0]
 
         return sum(distances) / len(distances)

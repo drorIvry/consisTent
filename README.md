@@ -40,16 +40,19 @@ This type of validators is used to assert the quality of the response with more 
 ### example
 
 ```python
+import consisTent
+
 seed = [
-    'the cat sat on the mat',
-    'the feline layed on the carpet',
-    ...
+    "the cat sat on the mat",
+    "the feline layed on the carpet",
 ]
 
 
-consisTent.ConsistencyValidator().validate(
+consisTent.ConsistencyValidator(
+    seed_size=2,
+    consistency_threshold=0.5,
+).validate(
     seed=seed,
-    model_output='the dog sat on the mat',
+    model_output="the dog sat on the mat",
 )
-
 ```
