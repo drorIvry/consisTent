@@ -32,7 +32,7 @@ consisTent.JsValidator().validate('console.log("Im a JS program!")')
 
 consisTent.PyValidator().validate('print("Im a python program!")')
 
-consisTent.JsonValidator().validate('"question": {"is this a valid JSON?"}')
+consisTent.JsonValidator().validate('{"question": "is this a valid JSON?"}')
 ```
 
 ### syntactic validators
