@@ -4,7 +4,7 @@ from langchain.output_parsers import StructuredOutputParser, ResponseSchema
 from langchain.prompts import ChatPromptTemplate, HumanMessagePromptTemplate
 from langchain.chat_models import ChatOpenAI
 
-from consisTent.validators.base_validator import Validator
+from ..base_validator import Validator
 
 
 class LabelsValidator(Validator):
